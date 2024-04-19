@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond Price Predictor</title>
+    <style>
+        body {
+            background-image: url('{{url_for("static",filename="unnamed.png") }}'); /* Replace 'background_image.jpg' with the path to your background image */
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="text-align: center;">PUBG Win Place Percentage Predictor</h2>
+    <form id="predictForm" action="/predict" method="POST">
+        <div class="form-group">
+            <label for="assists">Assists:</label>
+            <input type="number" id="assists" name="assists" required>
+        </div>
+        <div class="form-group">
+            <label for="boosts">Boosts:</label>
+            <input type="number" id="boosts" name="boosts" required>
+        </div>
+        <div class="form-group">
+            <label for="damageDealt">DamageDealt:</label>
+            <input type="number" id="damageDealt" name="damageDealt" required>
+        </div>
+        <div class="form-group">
+            <label for="DBNOs">DBNOS:</label>
+            <input type="number" id="DBNOs" name="DBNOs" required>
+        </div>
+        <div class="form-group">
+            <label for="headshotKills">Headshotkills:</label>
+            <input type="number" id="headshotKills" name="headshotKills" required>
+        </div>
+        <div class="form-group">
+            <label for="heals">Heals:</label>
+            <input type="number" id="heals" name="heals" required>
+        </div>
+        <div class="form-group">
+            <label for="killPlace">Killplace:</label>
+            <input type="number" id="killPlace" name="killPlace" required>
+        </div>
+        <div class="form-group">
+            <label for="killPoints">Killpoints:</label>
+            <input type="number" id="killPoints" name="killPoints" required>
+        </div>
+        <div class="form-group">
+            <label for="kills">Kills:</label>
+            <input type="number" id="kills" name="kills" required>
+        </div>
+        <div class="form-group">
+            <label for="killStreaks">Killstreaks:</label>
+            <input type="number" id="killStreaks" name="killStreaks" required>
+        </div>
+        <div class="form-group">
+            <label for="longestKill">Longestkill:</label>
+            <input type="number" id="longestKill" name="longestKill" required>
+        </div>
+        <div class="form-group">
+            <label for="matchDuration">Matchduration:</label>
+            <input type="number" id="matchDuration" name="matchDuration" required>
+        </div>
+        <div class="form-group">
+            <label for="maxPlace">Maximumplace:</label>
+            <input type="number" id="maxPlace" name="maxPlace" required>
+        </div>
+        <div class="form-group">
+            <label for="numGroups">NumberOfGroups:</label>
+            <input type="number" id="numGroups" name="numGroups" required>
+        </div>
+        <div class="form-group">
+            <label for="rankPoints">Rankpoints:</label>
+            <input type="number" id="rankPoints" name="rankPoints" required>
+        </div>
+        <div class="form-group">
+            <label for="revives">Revives:</label>
+            <input type="number" id="revives" name="revives" required>
+        </div>
+        <div class="form-group">
+            <label for="rideDistance">Ridedistance:</label>
+            <input type="number" id="rideDistance" name="rideDistance" required>
+        </div>
+        <div class="form-group">
+            <label for="swimDistance">Swimdistance:</label>
+            <input type="number" id="swimDistance" name="swimDistance" required>
+        </div>
+        <div class="form-group">
+            <label for="walkDistance">Walkdistance:</label>
+            <input type="number" id="walkDistance" name="walkDistance" required>
+        </div>
+        <div class="form-group">
+            <label for="weaponsAcquired">Weaponsacquired:</label>
+            <input type="number" id="weaponsAcquired" name="weaponsAcquired" required>
+        </div>
+        <div class="form-group">
+            <label for="winPoints">Winpoints:</label>
+            <input type="number" id="winPoints" name="winPoints" required>
+        </div>
+        <div class="form-group">
+            <label for="matchType">Matchtype:</label>
+            <select id="matchType" name="matchType" required>
+                <option value="">Select Matchtype</option>
+                <option value="solo-fpp">solo-fpp</option>
+                <option value="normal-solo-fpp">normal-solo-fpp</option>
+                <option value="normal-solo">normal-solo</option>
+                <option value="solo">solo</option>
+                <option value="crashtpp">crashtpp</option>
+                <option value="crashfpp">crashfpp</option>
+                <option value="flaretpp">flaretpp</option>
+                <option value="flarefpp">flarefpp</option>
+                <option value="duo-fpp">duo-fpp</option>
+                <option value="normal-duo-fpp">normal-duo-fpp</option>
+                <option value="normal-duo">normal-duo</option>
+                <option value="duo">duo</option>
+                <option value="squad-fpp">squad-fpp</option>
+                <option value="normal-squad-fpp">normal-squad-fpp</option>
+                <option value="normal-squad">normal-squad</option>
+                <option value="squad">squad</option>
+            </select>
+        </div>
+        <button type="submit">Predict Win Place Percentage</button>
+    </form>
+</div>
+</body>
+</html>

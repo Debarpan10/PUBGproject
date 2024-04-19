@@ -1,0 +1,11 @@
+pandas 
+numpy
+seaborn
+typing 
+scikit-learn
+pickles
+flask
+plotly
+mysql-connector-python
+sqlalchemy
+-e .
